@@ -1,32 +1,29 @@
 #include<iostream>
-#include "Registro_Movimientos.h"
+#include "Tablero.h"
 
 using namespace std;
 
 int main (int argc, char *argv[]) {
 	
-	RegistroMovimientos registro;
+	Tablero tablero;
 	
-	registro.registrarMovimiento('T', 'D');
-	registro.registrarMovimiento('T', 'D');
-	registro.registrarMovimiento('T', 'R');
+	for (int columna = 0; columna < 10; columna++)
+	{
+		tablero.setCelda(5, columna, 'T');
+		tablero.setCelda(6, columna, 'T');
+	}
 	
-	cout << "Deshaciendo:" << endl;
-	
-	cout << registro.deshacer() << endl;
-	cout << registro.deshacer() << endl;
-	cout << registro.deshacer() << endl;
+	cout << "Antes de eliminar:" << endl;
+	tablero.mostrar_Tablero();
 	
 	cout << endl;
 	
-	cout << "Rehaciendo:" << endl;
+	tablero.eliminar_Filas_Completas();
 	
-	cout << registro.rehacer() << endl;
-	cout << registro.rehacer() << endl;
-	cout << registro.rehacer() << endl;
+	cout << "Despues de eliminar:" << endl;
+	tablero.mostrar_Tablero();
 	
 	return 0;
-	
 
 }
 
