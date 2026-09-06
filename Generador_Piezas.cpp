@@ -1,8 +1,10 @@
 #include "Generador_Piezas.h"
 #include <cstdlib>
+#include <ctime>
 
 GeneradorPiezas::GeneradorPiezas()
 {
+	srand(time(0));
 	generarBolsa();
 }
 
