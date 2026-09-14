@@ -93,3 +93,23 @@ void RegistroMovimientos::mostrar_Atras()
 		auxiliar = auxiliar->getAnterior();
 	}
 }
+
+char RegistroMovimientos::getMovimientoActual()
+{
+	if (actual == nullptr)
+	{
+		return '\0';
+	}
+	
+	return actual->getMovimiento();
+}
+
+char RegistroMovimientos::getMovimientoSiguiente()
+{
+	if (actual == nullptr || actual->getSiguiente() == nullptr)
+	{
+		return '\0';
+	}
+	
+	return actual->getSiguiente()->getMovimiento();
+}

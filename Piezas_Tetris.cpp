@@ -313,3 +313,10 @@ void PiezaTetris::colocarEnTablero(Tablero& tablero)
 		}
 	}
 }
+void PiezaTetris::setOrientacion(int nuevaOrientacion)
+{
+	if (nuevaOrientacion >= 0 && nuevaOrientacion < 4)
+	{
+		orientacion = nuevaOrientacion;
+	}
+}

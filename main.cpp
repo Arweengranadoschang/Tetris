@@ -1,48 +1,29 @@
-#include<iostream>
-#include "Piezas_Tetris.h"
-#include "Tablero.h"
+#include <iostream>
+#include "Logica_Tetris.h"
 
 using namespace std;
 
-int main (int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
+	LogicaTetris juego;
 	
-	Tablero tablero;
+	juego.crearPieza();
 	
+	cout << "Pieza actual: "
+		<< juego.getPiezaActual()
+		<< endl;
 	
-	for (int columna = 0; columna < 10; columna++)
-	{
-		if (columna != 4 && columna != 5)
-		{
-			tablero.setCelda(19, columna, 'X');
-		}
-	}
+	juego.moverIzquierda();
+	juego.bajar();
+	juego.rotar();
 	
-	cout << "Tablero antes de colocar la pieza:" << endl;
-	tablero.mostrar_Tablero();
-	
-	cout << endl;
-	
-
-	PiezaTetris pieza('O');
-	
-	
-	pieza.setFila(17);
-	pieza.setColumna(3);
-	
-	pieza.colocarEnTablero(tablero);
-	
-	cout << "Tablero despues de colocar la pieza:" << endl;
-	tablero.mostrar_Tablero();
+	juego.colocarPieza();
 	
 	cout << endl;
+	cout << "MOVIMIENTOS REGISTRADOS:" << endl;
 	
-	
-	tablero.eliminar_Filas_Completas();
-	
-	cout << "Tablero despues de eliminar filas completas:" << endl;
-	tablero.mostrar_Tablero();
+	juego.getRegistro().mostrar_Adelante();
 	
 	return 0;
-	
 }
 

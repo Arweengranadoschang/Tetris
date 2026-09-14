@@ -1,5 +1,6 @@
 #ifndef PIEZAS_TETRIS_H
 #define PIEZAS_TETRIS_H
+
 #include "Tablero.h"
 
 class PiezaTetris
@@ -17,14 +18,13 @@ public:
 	
 	char getTipo();
 	int getOrientacion();
+	void setOrientacion(int orientacion);
 	
 	int getFila();
 	int getColumna();
 	
 	void setFila(int fila);
 	void setColumna(int columna);
-	
-
 	
 	char getCelda(int fila, int columna);
 	
