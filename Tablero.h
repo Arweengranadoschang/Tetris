@@ -16,7 +16,7 @@ public:
 	void mostrar_Tablero();
 	bool fila_Llena(int fila);
 	void eliminar_Fila(int fila);
-	void eliminar_Filas_Completas();
+	int eliminar_Filas_Completas();
 };
 
 #endif

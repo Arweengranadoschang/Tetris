@@ -6,6 +6,10 @@
 #include "Generador_Piezas.h"
 #include "Pila_EnEspera.h"
 #include "Registro_Movimientos.h"
+#include "Puntaje_Tabla.h"
+#include "Cola_Evento.h"
+#include "Logica_EventosEspeciales.h"
+
 
 class LogicaTetris
 {
@@ -15,7 +19,10 @@ private:
 	PiezaTetris* piezaActual;
 	PilaEnEspera pilaEnEspera;
 	RegistroMovimientos registro;
+	PuntajeTabla puntaje;
 	bool ejecutandoHistorial;
+	ColaEventos colaEventos;
+	LogicaEventosEspeciales eventosEspeciales;
 	
 public:
 	LogicaTetris();
@@ -36,9 +43,11 @@ public:
 	
 	Tablero& getTablero();
 	char getPiezaActual();
+	char getPiezaSiguiente(int posicion);
 	int getFilaPieza();
 	int getColumnaPieza();
 	int getOrientacionPieza();
+	
 	
 	void guardarPieza();
 	char getPiezaEnEspera();
@@ -47,6 +56,22 @@ public:
 	
 	bool deshacer();
 	bool rehacer();
+	
+	int getPuntaje();
+	void prepararEventos();
+	void revisarEventos();
+	
+	bool getBombaActiva();
+	
+	int getFilaBomba();
+	int getColumnaBomba();
+	
+	bool mover_BombaIzquierda();
+	bool mover_BombaDerecha();
+	bool bajar_Bomba();
+	
+	void colocarBomba();
+	bool getDoblePuntosActivo();
 };
 
 #endif

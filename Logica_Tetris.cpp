@@ -1,9 +1,13 @@
 #include "Logica_Tetris.h"
+#include <iostream>
+
+using namespace std;
 
 LogicaTetris::LogicaTetris()
 {
 	piezaActual = nullptr;
 	ejecutandoHistorial = false;
+	prepararEventos();
 }
 
 LogicaTetris::~LogicaTetris()
@@ -139,7 +143,18 @@ void LogicaTetris::colocarPieza()
 
 void LogicaTetris::eliminarFilas()
 {
-	tablero.eliminar_Filas_Completas();
+	int cantidadFilas = tablero.eliminar_Filas_Completas();
+	
+	int multiplicador = 1;
+	
+	if (eventosEspeciales.getDoblePuntosActivo())
+	{
+		multiplicador = 2;
+	}
+	
+	puntaje.agregarPuntos(cantidadFilas, multiplicador);
+	
+	revisarEventos();
 }
 
 Tablero& LogicaTetris::getTablero()
@@ -155,6 +170,10 @@ char LogicaTetris::getPiezaActual()
 	}
 	
 	return piezaActual->getTipo();
+}
+char LogicaTetris::getPiezaSiguiente(int posicion)
+{
+	return generador.verPieza(posicion);
 }
 
 int LogicaTetris::getFilaPieza()
@@ -329,4 +348,85 @@ bool LogicaTetris::rehacer()
 	}
 	
 	return false;
+}
+
+int LogicaTetris::getPuntaje()
+{
+	return puntaje.getPuntos();
+}
+
+void LogicaTetris::prepararEventos()
+{
+	colaEventos.encolar('B', 500);
+	colaEventos.encolar('D', 1000);
+	colaEventos.encolar('V', 1500);
+	colaEventos.encolar('B', 2000);
+	colaEventos.encolar('D', 2500);
+	colaEventos.encolar('V', 3000);
+}
+void LogicaTetris::revisarEventos()
+{
+	if (colaEventos.estaVacia())
+	{
+		return;
+	}
+	
+	if (puntaje.getPuntos() >= colaEventos.verActivacion())
+	{
+		NodoEvento* evento = colaEventos.desencolar();
+		
+		cout << "Evento activado: "
+			<< evento->getTipoEvento()
+			<< endl;
+		
+		if (evento->getTipoEvento() == 'B')
+		{
+			eventosEspeciales.activarBomba();
+		}
+		if (evento->getTipoEvento() == 'D')
+		{
+			eventosEspeciales.activarDoblePuntos();
+		}
+		
+		delete evento;
+	}
+}
+
+bool LogicaTetris::getBombaActiva()
+{
+	return eventosEspeciales.getBombaActiva();
+}
+
+int LogicaTetris::getFilaBomba()
+{
+	return eventosEspeciales.getFilaBomba();
+}
+
+int LogicaTetris::getColumnaBomba()
+{
+	return eventosEspeciales.getColumnaBomba();
+}
+
+bool LogicaTetris::mover_BombaIzquierda()
+{
+	return eventosEspeciales.mover_BombaIzquierda(tablero);
+}
+
+bool LogicaTetris::mover_BombaDerecha()
+{
+	return eventosEspeciales.mover_BombaDerecha(tablero);
+}
+
+bool LogicaTetris::bajar_Bomba()
+{
+	return eventosEspeciales.bajar_Bomba(tablero);
+}
+
+void LogicaTetris::colocarBomba()
+{
+	eventosEspeciales.colocarBomba(tablero);
+}
+bool LogicaTetris::getDoblePuntosActivo()
+{
+	return eventosEspeciales.getDoblePuntosActivo();
 }

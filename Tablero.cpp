@@ -127,19 +127,23 @@ void Tablero::eliminar_Fila(int fila)
 	primeraFila = nuevaFila;
 }
 
-void Tablero::eliminar_Filas_Completas()
+int Tablero::eliminar_Filas_Completas()
 {
 	int fila = 0;
+	int cantidadFilas = 0;
 	
 	while (fila < 20)
 	{
 		if (fila_Llena(fila))
 		{
 			eliminar_Fila(fila);
+			cantidadFilas++;
 		}
 		else
 		{
 			fila++;
 		}
 	}
+	
+	return cantidadFilas;
 }
