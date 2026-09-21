@@ -1,8 +1,7 @@
 #ifndef NODO_MOVIMIENTOS_H
 #define NODO_MOVIMIENTOS_H
 
-class NodoMovimiento
-{
+class NodoMovimiento{
 private:
 	char pieza;
 	char movimiento;
@@ -26,5 +25,4 @@ public:
 	NodoMovimiento* getSiguiente();
 	void setSiguiente(NodoMovimiento* siguiente);
 };
-
 #endif

@@ -3,25 +3,21 @@
 
 using namespace std;
 
-RegistroMovimientos::RegistroMovimientos()
-{
+RegistroMovimientos::RegistroMovimientos(){
 	primero = nullptr;
 	ultimo = nullptr;
 	actual = nullptr;
 }
 
-void RegistroMovimientos::registrarMovimiento(char pieza, char movimiento)
-{
+void RegistroMovimientos::registrarMovimiento(char pieza, char movimiento){
 	NodoMovimiento* nuevo = new NodoMovimiento(pieza, movimiento);
 	
-	if (primero == nullptr)
-	{
+	if (primero == nullptr){
 		primero = nuevo;
 		ultimo = nuevo;
 		actual = nuevo;
 	}
-	else
-	{
+	else{
 		ultimo->setSiguiente(nuevo);
 		nuevo->setAnterior(ultimo);
 		
@@ -30,15 +26,12 @@ void RegistroMovimientos::registrarMovimiento(char pieza, char movimiento)
 	}
 }
 
-bool RegistroMovimientos::deshacer()
-{
-	if (actual == nullptr)
-	{
+bool RegistroMovimientos::deshacer(){
+	if (actual == nullptr){
 		return false;
 	}
 	
-	if (actual->getAnterior() == nullptr)
-	{
+	if (actual->getAnterior() == nullptr){
 		return false;
 	}
 	
@@ -47,15 +40,12 @@ bool RegistroMovimientos::deshacer()
 	return true;
 }
 
-bool RegistroMovimientos::rehacer()
-{
-	if (actual == nullptr)
-	{
+bool RegistroMovimientos::rehacer(){
+	if (actual == nullptr){
 		return false;
 	}
 	
-	if (actual->getSiguiente() == nullptr)
-	{
+	if (actual->getSiguiente() == nullptr){
 		return false;
 	}
 	
@@ -64,12 +54,11 @@ bool RegistroMovimientos::rehacer()
 	return true;
 }
 
-void RegistroMovimientos::mostrar_Adelante()
-{
+void RegistroMovimientos::mostrar_Adelante(){
+	
 	NodoMovimiento* auxiliar = primero;
 	
-	while (auxiliar != nullptr)
-	{
+	while (auxiliar != nullptr){
 		cout << auxiliar->getPieza()
 			<< "-"
 			<< auxiliar->getMovimiento()
@@ -79,12 +68,10 @@ void RegistroMovimientos::mostrar_Adelante()
 	}
 }
 
-void RegistroMovimientos::mostrar_Atras()
-{
+void RegistroMovimientos::mostrar_Atras(){
 	NodoMovimiento* auxiliar = ultimo;
 	
-	while (auxiliar != nullptr)
-	{
+	while (auxiliar != nullptr){
 		cout << auxiliar->getPieza()
 			<< "-"
 			<< auxiliar->getMovimiento()
@@ -94,20 +81,17 @@ void RegistroMovimientos::mostrar_Atras()
 	}
 }
 
-char RegistroMovimientos::getMovimientoActual()
-{
-	if (actual == nullptr)
-	{
+char RegistroMovimientos::getMovimientoActual(){
+	if (actual == nullptr){
 		return '\0';
 	}
 	
 	return actual->getMovimiento();
 }
 
-char RegistroMovimientos::getMovimientoSiguiente()
-{
-	if (actual == nullptr || actual->getSiguiente() == nullptr)
-	{
+char RegistroMovimientos::getMovimientoSiguiente(){
+	
+	if (actual == nullptr || actual->getSiguiente() == nullptr){
 		return '\0';
 	}
 	

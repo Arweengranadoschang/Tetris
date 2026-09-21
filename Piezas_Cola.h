@@ -2,8 +2,7 @@
 #define PIEZAS_COLA_H
 #include "Nodo_Cola.h"
 
-class ColaPiezas
-{
+class ColaPiezas{
 private:
 	NodoCola* frente;
 	NodoCola* final;
@@ -19,9 +18,4 @@ public:
 	
 	bool estaVacia();
 };
-
-
-
-
-
 #endif

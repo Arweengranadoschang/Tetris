@@ -1,28 +1,23 @@
 #include "Nodo_Evento.h"
 
-NodoEvento::NodoEvento(char tipoEvento, int activacion)
-{
+NodoEvento::NodoEvento(char tipoEvento, int activacion){
 	this->tipoEvento = tipoEvento;
 	this->activacion = activacion;
 	siguiente = nullptr;
 }
 
-char NodoEvento::getTipoEvento()
-{
+char NodoEvento::getTipoEvento(){
 	return tipoEvento;
 }
 
-int NodoEvento::getActivacion()
-{
+int NodoEvento::getActivacion(){
 	return activacion;
 }
 
-NodoEvento* NodoEvento::getSiguiente()
-{
+NodoEvento* NodoEvento::getSiguiente(){
 	return siguiente;
 }
 
-void NodoEvento::setSiguiente(NodoEvento* siguiente)
-{
+void NodoEvento::setSiguiente(NodoEvento* siguiente){
 	this->siguiente = siguiente;
 }

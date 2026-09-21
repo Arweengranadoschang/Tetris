@@ -2,8 +2,7 @@
 #define COLA_EVENTO_H
 #include "Nodo_Evento.h"
 
-class ColaEventos
-{
+class ColaEventos{
 private:
 	NodoEvento* frente;
 	NodoEvento* final;
@@ -14,8 +13,8 @@ public:
 	void encolar(char tipoEvento, int activacion);
 	NodoEvento* desencolar();
 	
-	char verTipoEvento();
-	int verActivacion();
+	char Tipo_Evento();
+	int Activacion();
 	
 	bool estaVacia();
 };

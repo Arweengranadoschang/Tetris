@@ -1,31 +1,25 @@
 #include "Piezas_cola.h"
 
-ColaPiezas::ColaPiezas()
-{
+ColaPiezas::ColaPiezas(){
 	frente = nullptr;
 	final = nullptr;
 }
 
-void ColaPiezas::encolar(char pieza)
-{
+void ColaPiezas::encolar(char pieza){
 	NodoCola* nuevo = new NodoCola(pieza);
 	
-	if (estaVacia())
-	{
+	if (estaVacia()){
 		frente = nuevo;
 		final = nuevo;
 	}
-	else
-	{
+	else{
 		final->setSiguiente(nuevo);
 		final = nuevo;
 	}
 }
 
-char ColaPiezas::desencolar()
-{
-	if (estaVacia())
-	{
+char ColaPiezas::desencolar(){
+	if (estaVacia()){
 		return '\0';
 	}
 	
@@ -34,8 +28,7 @@ char ColaPiezas::desencolar()
 	
 	frente = frente->getSiguiente();
 	
-	if (frente == nullptr)
-	{
+	if (frente == nullptr){
 		final = nullptr;
 	}
 	
@@ -44,10 +37,8 @@ char ColaPiezas::desencolar()
 	return pieza;
 }
 
-char ColaPiezas::verFrente()
-{
-	if (estaVacia())
-	{
+char ColaPiezas::verFrente(){
+	if (estaVacia()){
 		return '\0';
 	}
 	
@@ -55,19 +46,16 @@ char ColaPiezas::verFrente()
 }
 
 
-char ColaPiezas::verPieza(int posicion)
-{
-	if (posicion < 0 || estaVacia())
-	{
+char ColaPiezas::verPieza(int posicion){
+	if (posicion < 0 || estaVacia()){
 		return '\0';
 	}
 	
 	NodoCola* auxiliar = frente;
 	
-	for (int i = 0; i < posicion; i++)
-	{
-		if (auxiliar->getSiguiente() == nullptr)
-		{
+	for (int i = 0; i < posicion; i++){
+		
+		if (auxiliar->getSiguiente() == nullptr){
 			return '\0';
 		}
 		
@@ -77,9 +65,6 @@ char ColaPiezas::verPieza(int posicion)
 	return auxiliar->getPieza();
 }
 
-
-
-bool ColaPiezas::estaVacia()
-{
+bool ColaPiezas::estaVacia(){
 	return frente == nullptr;
 }

@@ -3,8 +3,7 @@
 
 #include "Nodo_Movimientos.h"
 
-class RegistroMovimientos
-{
+class RegistroMovimientos{
 private:
 	NodoMovimiento* primero;
 	NodoMovimiento* ultimo;

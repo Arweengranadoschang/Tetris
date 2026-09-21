@@ -1,8 +1,7 @@
 #ifndef NODO_COLA_H
 #define NODO_COLA_H
 
-class NodoCola
-{
+class NodoCola{
 private:
 	char pieza;
 	NodoCola* siguiente;
@@ -15,6 +14,4 @@ public:
 	
 	void setSiguiente(NodoCola* siguiente);
 };
-
-
 #endif

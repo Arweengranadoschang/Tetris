@@ -2,8 +2,7 @@
 #define TABLERO_H
 #include "Nodo_Fila_Tablero.h"
 
-class Tablero
-{
+class Tablero{
 private:
 	NodoFilaTablero* primeraFila;
 	
@@ -18,5 +17,4 @@ public:
 	void eliminar_Fila(int fila);
 	int eliminar_Filas_Completas();
 };
-
 #endif

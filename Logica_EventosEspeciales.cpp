@@ -5,7 +5,11 @@ LogicaEventosEspeciales::LogicaEventosEspeciales()
 	bombaActiva = false;
 	filaBomba = 0;
 	columnaBomba = 4;
+	
 	doblePuntos_Activo = false;
+	
+	velocidad_Activa = false;
+	velocidad_Caida = 2.0f;
 }
 
 void LogicaEventosEspeciales::activarBomba()
@@ -41,7 +45,11 @@ void LogicaEventosEspeciales::setColumnaBomba(int columna)
 	columnaBomba = columna;
 }
 
-bool LogicaEventosEspeciales::puedeMoverBomba(Tablero& tablero,int nuevaFila,int nuevaColumna){
+bool LogicaEventosEspeciales::puedeMoverBomba(
+											  Tablero& tablero,
+											  int nuevaFila,
+											  int nuevaColumna)
+{
 	if (nuevaFila < 0 || nuevaFila >= 20)
 	{
 		return false;
@@ -52,7 +60,6 @@ bool LogicaEventosEspeciales::puedeMoverBomba(Tablero& tablero,int nuevaFila,int
 		return false;
 	}
 	
-	
 	if (tablero.getCelda(nuevaFila, nuevaColumna) != '.')
 	{
 		return false;
@@ -61,13 +68,12 @@ bool LogicaEventosEspeciales::puedeMoverBomba(Tablero& tablero,int nuevaFila,int
 	return true;
 }
 
-bool LogicaEventosEspeciales::mover_BombaIzquierda(Tablero& tablero){
-	
+bool LogicaEventosEspeciales::mover_BombaIzquierda(Tablero& tablero)
+{
 	if (!bombaActiva)
 	{
 		return false;
 	}
-	
 	
 	if (puedeMoverBomba(tablero, filaBomba, columnaBomba - 1))
 	{
@@ -78,8 +84,8 @@ bool LogicaEventosEspeciales::mover_BombaIzquierda(Tablero& tablero){
 	return false;
 }
 
-bool LogicaEventosEspeciales::mover_BombaDerecha(Tablero& tablero){
-	
+bool LogicaEventosEspeciales::mover_BombaDerecha(Tablero& tablero)
+{
 	if (!bombaActiva)
 	{
 		return false;
@@ -94,14 +100,12 @@ bool LogicaEventosEspeciales::mover_BombaDerecha(Tablero& tablero){
 	return false;
 }
 
-
-bool LogicaEventosEspeciales::bajar_Bomba(Tablero& tablero){
-	
+bool LogicaEventosEspeciales::bajar_Bomba(Tablero& tablero)
+{
 	if (!bombaActiva)
 	{
 		return false;
 	}
-	
 	
 	if (puedeMoverBomba(tablero, filaBomba + 1, columnaBomba))
 	{
@@ -149,4 +153,20 @@ void LogicaEventosEspeciales::activarDoblePuntos()
 bool LogicaEventosEspeciales::getDoblePuntosActivo()
 {
 	return doblePuntos_Activo;
+}
+
+void LogicaEventosEspeciales::activar_Velocidad()
+{
+	velocidad_Activa = true;
+	velocidad_Caida = 0.5f;
+}
+
+bool LogicaEventosEspeciales::getVelocidad_Activa()
+{
+	return velocidad_Activa;
+}
+
+float LogicaEventosEspeciales::getVelocidad_Caida()
+{
+	return velocidad_Caida;
 }

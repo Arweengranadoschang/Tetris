@@ -3,22 +3,20 @@
 
 using namespace std;
 
-Tablero::Tablero()
-{
+Tablero::Tablero(){
+	
 	primeraFila = nullptr;
 	
 	NodoFilaTablero* anterior = nullptr;
 	
-	for (int i = 0; i < 20; i++)
-	{
+	for (int i = 0; i < 20; i++){
+		
 		NodoFilaTablero* nuevaFila = new NodoFilaTablero();
 		
-		if (primeraFila == nullptr)
-		{
+		if (primeraFila == nullptr){
 			primeraFila = nuevaFila;
 		}
-		else
-		{
+		else{
 			anterior->setSiguiente(nuevaFila);
 		}
 		
@@ -26,48 +24,41 @@ Tablero::Tablero()
 	}
 }
 
-char Tablero::getCelda(int fila, int columna)
-{
-	if (fila < 0 || fila >= 20 || columna < 0 || columna >= 10)
-	{
+char Tablero::getCelda(int fila, int columna){
+	
+	if (fila < 0 || fila >= 20 || columna < 0 || columna >= 10)	{
 		return '\0';
 	}
 	
 	NodoFilaTablero* auxiliar = primeraFila;
 	
-	for (int i = 0; i < fila; i++)
-	{
+	for (int i = 0; i < fila; i++){
 		auxiliar = auxiliar->getSiguiente();
 	}
 	
 	return auxiliar->getCelda(columna);
 }
 
-void Tablero::setCelda(int fila, int columna, char valor)
-{
-	if (fila < 0 || fila >= 20 || columna < 0 || columna >= 10)
-	{
+void Tablero::setCelda(int fila, int columna, char valor){
+	
+	if (fila < 0 || fila >= 20 || columna < 0 || columna >= 10){
 		return;
 	}
 	
 	NodoFilaTablero* auxiliar = primeraFila;
 	
-	for (int i = 0; i < fila; i++)
-	{
+	for (int i = 0; i < fila; i++){
 		auxiliar = auxiliar->getSiguiente();
 	}
 	
 	auxiliar->setCelda(columna, valor);
 }
 
-void Tablero::mostrar_Tablero()
-{
+void Tablero::mostrar_Tablero(){
 	NodoFilaTablero* auxiliar = primeraFila;
 	
-	while (auxiliar != nullptr)
-	{
-		for (int columna = 0; columna < 10; columna++)
-		{
+	while (auxiliar != nullptr){
+		for (int columna = 0; columna < 10; columna++){
 			cout << auxiliar->getCelda(columna) << " ";
 		}
 		
@@ -77,45 +68,38 @@ void Tablero::mostrar_Tablero()
 	}
 }
 
-bool Tablero::fila_Llena(int fila)
-{
-	if (fila < 0 || fila >= 20)
-	{
+bool Tablero::fila_Llena(int fila){
+	if (fila < 0 || fila >= 20){
 		return false;
 	}
 	
 	NodoFilaTablero* auxiliar = primeraFila;
 	
-	for (int i = 0; i < fila; i++)
-	{
+	for (int i = 0; i < fila; i++){
 		auxiliar = auxiliar->getSiguiente();
 	}
 	
 	return auxiliar->estaLlena();
 }
 
-void Tablero::eliminar_Fila(int fila)
-{
-	if (fila < 0 || fila >= 20)
-	{
+void Tablero::eliminar_Fila(int fila){
+	
+	if (fila < 0 || fila >= 20){
 		return;
 	}
 	
 	NodoFilaTablero* auxiliar = primeraFila;
 	NodoFilaTablero* anterior = nullptr;
 	
-	for (int i = 0; i < fila; i++)
-	{
+	for (int i = 0; i < fila; i++){
 		anterior = auxiliar;
 		auxiliar = auxiliar->getSiguiente();
 	}
 	
-	if (anterior == nullptr)
-	{
+	if (anterior == nullptr){
 		primeraFila = auxiliar->getSiguiente();
 	}
-	else
-	{
+	else{
 		anterior->setSiguiente(auxiliar->getSiguiente());
 	}
 	
@@ -127,20 +111,17 @@ void Tablero::eliminar_Fila(int fila)
 	primeraFila = nuevaFila;
 }
 
-int Tablero::eliminar_Filas_Completas()
-{
+int Tablero::eliminar_Filas_Completas(){
+	
 	int fila = 0;
 	int cantidadFilas = 0;
 	
-	while (fila < 20)
-	{
-		if (fila_Llena(fila))
-		{
+	while (fila < 20){
+		if (fila_Llena(fila)){
 			eliminar_Fila(fila);
 			cantidadFilas++;
 		}
-		else
-		{
+		else{
 			fila++;
 		}
 	}

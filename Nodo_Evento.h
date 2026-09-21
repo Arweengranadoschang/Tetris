@@ -1,8 +1,7 @@
 #ifndef NODO_EVENTO_H
 #define NODO_EVENTO_H
 
-class NodoEvento
-{
+class NodoEvento{
 private:
 	char tipoEvento;
 	int activacion;
@@ -17,5 +16,4 @@ public:
 	NodoEvento* getSiguiente();
 	void setSiguiente(NodoEvento* siguiente);
 };
-
 #endif

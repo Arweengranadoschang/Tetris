@@ -1,21 +1,16 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Visual_Tetris.h"
 
 using namespace std;
 
-int main(int argc, char *argv[])
-{
-	sf::RenderWindow ventana( sf::VideoMode({800, 600}), "Tetris - Prueba SFML" );
+int main(int argc, char *argv[]){
 	
-	while (ventana.isOpen()) {
-		while (auto evento = ventana.pollEvent()) {
-			if (evento->is<sf::Event::Closed>()) {
-				ventana.close(); 
-			} 
-		}
-	}
-	ventana.clear(); 
-	ventana.display();
+	Visual_Tetris juego;
+	
+	juego.ejecutar();
+	
+	return 0;
 }
 
 

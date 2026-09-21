@@ -1,30 +1,25 @@
 #include "Cola_Evento.h"
 
-ColaEventos::ColaEventos()
-{
+ColaEventos::ColaEventos(){
 	frente = nullptr;
 	final = nullptr;
 }
 
-bool ColaEventos::estaVacia()
-{
+bool ColaEventos::estaVacia(){
 	return frente == nullptr;
 }
-void ColaEventos::encolar(char tipoEvento, int activacion)
-{
+void ColaEventos::encolar(char tipoEvento, int activacion){
 	NodoEvento* nuevo = new NodoEvento(tipoEvento, activacion);
 	
 	
-	if (estaVacia())
-	{
+	if (estaVacia()){
 		frente = nuevo;
 		final = nuevo;
 		return;
 	}
 	
 	
-	if (activacion < frente->getActivacion())
-	{
+	if (activacion < frente->getActivacion()){
 		nuevo->setSiguiente(frente);
 		frente = nuevo;
 		return;
@@ -33,9 +28,7 @@ void ColaEventos::encolar(char tipoEvento, int activacion)
 	
 	NodoEvento* actual = frente;
 	
-	while (actual->getSiguiente() != nullptr &&
-		   actual->getSiguiente()->getActivacion() <= activacion)
-	{
+	while (actual->getSiguiente() != nullptr && actual->getSiguiente()->getActivacion() <= activacion){
 		actual = actual->getSiguiente();
 	}
 	
@@ -43,15 +36,12 @@ void ColaEventos::encolar(char tipoEvento, int activacion)
 	actual->setSiguiente(nuevo);
 	
 	
-	if (nuevo->getSiguiente() == nullptr)
-	{
+	if (nuevo->getSiguiente() == nullptr){
 		final = nuevo;
 	}
 }
-NodoEvento* ColaEventos::desencolar()
-{
-	if (estaVacia())
-	{
+NodoEvento* ColaEventos::desencolar(){
+	if (estaVacia()){
 		return nullptr;
 	}
 	
@@ -59,8 +49,7 @@ NodoEvento* ColaEventos::desencolar()
 	
 	frente = frente->getSiguiente();
 	
-	if (frente == nullptr)
-	{
+	if (frente == nullptr){
 		final = nullptr;
 	}
 	
@@ -68,20 +57,16 @@ NodoEvento* ColaEventos::desencolar()
 	
 	return auxiliar;
 }
-char ColaEventos::verTipoEvento()
-{
-	if (estaVacia())
-	{
+char ColaEventos::Tipo_Evento(){
+	if (estaVacia()){
 		return '\0';
 	}
 	
 	return frente->getTipoEvento();
 }
 
-int ColaEventos::verActivacion()
-{
-	if (estaVacia())
-	{
+int ColaEventos::Activacion(){
+	if (estaVacia()){
 		return -1;
 	}
 	

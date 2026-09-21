@@ -23,6 +23,7 @@ private:
 	bool ejecutandoHistorial;
 	ColaEventos colaEventos;
 	LogicaEventosEspeciales eventosEspeciales;
+	bool Game_Over;
 	
 public:
 	LogicaTetris();
@@ -72,6 +73,12 @@ public:
 	
 	void colocarBomba();
 	bool getDoblePuntosActivo();
+	
+	char getCeldaPiezaActual(int fila, int columna);
+	void avanzar_Pieza();
+	bool getGame_Over();
+	
+	float getVelocidadCaida();
 };
 
 #endif

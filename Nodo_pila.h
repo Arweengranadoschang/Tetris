@@ -1,8 +1,7 @@
 #ifndef NODO_PILA_H
 #define NODO_PILA_H
 
-class NodoPila
-{
+class NodoPila{
 private:
 	char pieza;
 	NodoPila* siguiente;
@@ -17,6 +16,4 @@ public:
 	NodoPila* getSiguiente();
 	void setSiguiente(NodoPila* siguiente);
 };
-
-
 #endif

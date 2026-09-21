@@ -2,18 +2,16 @@
 #include <cstdlib>
 #include <ctime>
 
-GeneradorPiezas::GeneradorPiezas()
-{
+GeneradorPiezas::GeneradorPiezas(){
 	srand(time(0));
-	generarBolsa();
+	generar_Bolsa();
 }
 
-void GeneradorPiezas::generarBolsa()
-{
+void GeneradorPiezas::generar_Bolsa(){
+	
 	char piezas[7] = {'I', 'O', 'T', 'S', 'Z', 'J', 'L'};
 	
-	for (int i = 6; i > 0; i--)
-	{
+	for (int i = 6; i > 0; i--){
 		int posicion = rand() % (i + 1);
 		
 		char auxiliar = piezas[i];
@@ -21,25 +19,32 @@ void GeneradorPiezas::generarBolsa()
 		piezas[posicion] = auxiliar;
 	}
 	
-	for (int i = 0; i < 7; i++)
-	{
+	for (int i = 0; i < 7; i++){
 		cola.encolar(piezas[i]);
 	}
-	
-	
-}
-char GeneradorPiezas::siguientePieza()
-{
-	if (cola.estaVacia())
-	{
-		generarBolsa();
-	}
-	
-	return cola.desencolar();
-	
 }
 
-char GeneradorPiezas::verPieza(int posicion)
-{
+char GeneradorPiezas::siguiente_Pieza(){
+
+	char pieza = cola.desencolar();
+	
+	asegurar_Piezas();
+	
+	return pieza;	
+}
+
+char GeneradorPiezas::ver_Pieza(int posicion){
+	
+	
+	asegurar_Piezas();
+	
+	
 	return cola.verPieza(posicion);
+}
+
+void GeneradorPiezas::asegurar_Piezas(){
+	
+	if (cola.verPieza(6) == '\0'){
+		generar_Bolsa();
+	}
 }

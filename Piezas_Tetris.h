@@ -3,8 +3,7 @@
 
 #include "Tablero.h"
 
-class PiezaTetris
-{
+class PiezaTetris{
 private:
 	char tipo;
 	int orientacion;
@@ -28,12 +27,12 @@ public:
 	
 	char getCelda(int fila, int columna);
 	
-	bool puedeColocarse(Tablero& tablero, int nuevaFila, int nuevaColumna);
-	bool moverIzquierda(Tablero& tablero);
-	bool moverDerecha(Tablero& tablero);
+	bool puede_Colocarse(Tablero& tablero, int nuevaFila, int nuevaColumna);
+	bool mover_Izquierda(Tablero& tablero);
+	bool mover_Derecha(Tablero& tablero);
 	bool bajar(Tablero& tablero);
 	bool rotar(Tablero& tablero);
-	void colocarEnTablero(Tablero& tablero);
+	void colocar_Tablero(Tablero& tablero);
 };
 
 #endif

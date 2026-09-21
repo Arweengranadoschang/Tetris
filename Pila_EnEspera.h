@@ -3,8 +3,7 @@
 
 #include "Nodo_Pila.h"
 
-class PilaEnEspera
-{
+class PilaEnEspera{
 private:
 	NodoPila* cima;
 	
@@ -17,5 +16,4 @@ public:
 	char verCima();
 	bool estaVacia();
 };
-
 #endif

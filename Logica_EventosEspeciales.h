@@ -11,6 +11,10 @@ private:
 	bool puedeMoverBomba(Tablero& tablero, int nuevaFila, int nuevaColumna);
 	bool doblePuntos_Activo;
 	
+	
+	bool velocidad_Activa;
+	float velocidad_Caida;
+	
 public:
 	LogicaEventosEspeciales();
 	
@@ -34,6 +38,10 @@ public:
 	
 	void activarDoblePuntos();
 	bool getDoblePuntosActivo();
+	
+	void activar_Velocidad();
+	bool getVelocidad_Activa();
+	float getVelocidad_Caida();
 };
 
 #endif

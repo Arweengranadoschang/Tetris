@@ -7,7 +7,10 @@ LogicaTetris::LogicaTetris()
 {
 	piezaActual = nullptr;
 	ejecutandoHistorial = false;
+	
 	prepararEventos();
+	
+	Game_Over = false;
 }
 
 LogicaTetris::~LogicaTetris()
@@ -25,7 +28,7 @@ void LogicaTetris::crearPieza()
 		delete piezaActual;
 	}
 	
-	char tipo = generador.siguientePieza();
+	char tipo = generador.siguiente_Pieza();
 	
 	piezaActual = new PiezaTetris(tipo);
 }
@@ -37,7 +40,7 @@ bool LogicaTetris::puedeCrearPieza()
 		return false;
 	}
 	
-	return piezaActual->puedeColocarse(tablero, 0, 3);
+	return piezaActual->puede_Colocarse(tablero, 0, 3);
 }
 
 bool LogicaTetris::jugarPieza()
@@ -67,11 +70,13 @@ bool LogicaTetris::moverIzquierda()
 		return false;
 	}
 	
-	bool movimientoRealizado = piezaActual->moverIzquierda(tablero);
+	bool movimientoRealizado =
+		piezaActual->mover_Izquierda(tablero);
 	
 	if (movimientoRealizado && !ejecutandoHistorial)
 	{
-		registro.registrarMovimiento(piezaActual->getTipo(), 'I');
+		registro.registrarMovimiento(
+									 piezaActual->getTipo(), 'I');
 	}
 	
 	return movimientoRealizado;
@@ -84,11 +89,13 @@ bool LogicaTetris::moverDerecha()
 		return false;
 	}
 	
-	bool movimientoRealizado = piezaActual->moverDerecha(tablero);
+	bool movimientoRealizado =
+		piezaActual->mover_Derecha(tablero);
 	
 	if (movimientoRealizado && !ejecutandoHistorial)
 	{
-		registro.registrarMovimiento(piezaActual->getTipo(), 'D');
+		registro.registrarMovimiento(
+									 piezaActual->getTipo(), 'D');
 	}
 	
 	return movimientoRealizado;
@@ -101,14 +108,87 @@ bool LogicaTetris::bajar()
 		return false;
 	}
 	
-	bool movimientoRealizado = piezaActual->bajar(tablero);
+	bool movimientoRealizado =
+		piezaActual->bajar(tablero);
 	
 	if (movimientoRealizado && !ejecutandoHistorial)
 	{
-		registro.registrarMovimiento(piezaActual->getTipo(), 'B');
+		registro.registrarMovimiento(
+									 piezaActual->getTipo(), 'B');
 	}
 	
 	return movimientoRealizado;
+}
+
+void LogicaTetris::avanzar_Pieza()
+{
+	if (Game_Over)
+	{
+		return;
+	}
+	
+	if (eventosEspeciales.getBombaActiva())
+	{
+		bajar_Bomba();
+		return;
+	}
+	
+	if (piezaActual == nullptr)
+	{
+		crearPieza();
+		
+		if (!puedeCrearPieza())
+		{
+			Game_Over = true;
+			
+			delete piezaActual;
+			piezaActual = nullptr;
+			
+			cout << "GAME OVER" << endl;
+		}
+		
+		return;
+	}
+	
+	bool puedeBajar = piezaActual->bajar(tablero);
+	
+	if (puedeBajar)
+	{
+		if (!ejecutandoHistorial)
+		{
+			registro.registrarMovimiento(
+										 piezaActual->getTipo(),
+										 'B'
+										 );
+		}
+		
+		return;
+	}
+	
+	
+	colocarPieza();
+	
+	
+	eliminarFilas();
+	
+	
+	if (eventosEspeciales.getBombaActiva())
+	{
+		return;
+	}
+	
+	
+	crearPieza();
+	
+	if (!puedeCrearPieza())
+	{
+		Game_Over = true;
+		
+		delete piezaActual;
+		piezaActual = nullptr;
+		
+		cout << "GAME OVER" << endl;
+	}
 }
 
 bool LogicaTetris::rotar()
@@ -118,11 +198,13 @@ bool LogicaTetris::rotar()
 		return false;
 	}
 	
-	bool movimientoRealizado = piezaActual->rotar(tablero);
+	bool movimientoRealizado =
+		piezaActual->rotar(tablero);
 	
 	if (movimientoRealizado && !ejecutandoHistorial)
 	{
-		registro.registrarMovimiento(piezaActual->getTipo(), 'R');
+		registro.registrarMovimiento(
+									 piezaActual->getTipo(), 'R');
 	}
 	
 	return movimientoRealizado;
@@ -132,27 +214,34 @@ void LogicaTetris::colocarPieza()
 {
 	if (piezaActual != nullptr)
 	{
-		piezaActual->colocarEnTablero(tablero);
+		piezaActual->colocar_Tablero(tablero);
 		
 		if (!ejecutandoHistorial)
 		{
-			registro.registrarMovimiento(piezaActual->getTipo(), 'C');
+			registro.registrarMovimiento(
+										 piezaActual->getTipo(), 'C');
 		}
 	}
 }
 
 void LogicaTetris::eliminarFilas()
 {
-	int cantidadFilas = tablero.eliminar_Filas_Completas();
+	int cantidadFilas =
+		tablero.eliminar_Filas_Completas();
 	
-	int multiplicador = 1;
-	
-	if (eventosEspeciales.getDoblePuntosActivo())
+	if (cantidadFilas > 0)
 	{
-		multiplicador = 2;
+		int multiplicador = 1;
+		
+		if (eventosEspeciales.getDoblePuntosActivo())
+		{
+			multiplicador = 2;
+		}
+		
+		puntaje.agregarPuntos(
+							  cantidadFilas,
+							  multiplicador);
 	}
-	
-	puntaje.agregarPuntos(cantidadFilas, multiplicador);
 	
 	revisarEventos();
 }
@@ -171,9 +260,10 @@ char LogicaTetris::getPiezaActual()
 	
 	return piezaActual->getTipo();
 }
+
 char LogicaTetris::getPiezaSiguiente(int posicion)
 {
-	return generador.verPieza(posicion);
+	return generador.ver_Pieza(posicion);
 }
 
 int LogicaTetris::getFilaPieza()
@@ -213,7 +303,8 @@ void LogicaTetris::guardarPieza()
 		return;
 	}
 	
-	char piezaGuardada = piezaActual->getTipo();
+	char piezaGuardada =
+		piezaActual->getTipo();
 	
 	if (pilaEnEspera.estaVacia())
 	{
@@ -227,13 +318,15 @@ void LogicaTetris::guardarPieza()
 	}
 	else
 	{
-		char piezaEnEspera = pilaEnEspera.desapilar();
+		char piezaEnEspera =
+			pilaEnEspera.desapilar();
 		
 		pilaEnEspera.apilar(piezaGuardada);
 		
 		delete piezaActual;
 		
-		piezaActual = new PiezaTetris(piezaEnEspera);
+		piezaActual =
+			new PiezaTetris(piezaEnEspera);
 	}
 }
 
@@ -254,7 +347,8 @@ bool LogicaTetris::deshacer()
 		return false;
 	}
 	
-	char movimiento = registro.getMovimientoActual();
+	char movimiento =
+		registro.getMovimientoActual();
 	
 	if (movimiento == '\0')
 	{
@@ -267,31 +361,40 @@ bool LogicaTetris::deshacer()
 	
 	if (movimiento == 'I')
 	{
-		resultado = piezaActual->moverDerecha(tablero);
+		resultado =
+			piezaActual->mover_Derecha(tablero);
 	}
 	else if (movimiento == 'D')
 	{
-		resultado = piezaActual->moverIzquierda(tablero);
+		resultado =
+			piezaActual->mover_Izquierda(tablero);
 	}
 	else if (movimiento == 'B')
 	{
 		if (piezaActual->getFila() > 0)
 		{
-			piezaActual->setFila(piezaActual->getFila() - 1);
+			piezaActual->setFila(
+								 piezaActual->getFila() - 1);
+			
 			resultado = true;
 		}
 	}
 	else if (movimiento == 'R')
 	{
-		int orientacionActual = piezaActual->getOrientacion();
-		int orientacionAnterior = orientacionActual - 1;
+		int orientacionActual =
+			piezaActual->getOrientacion();
+		
+		int orientacionAnterior =
+			orientacionActual - 1;
 		
 		if (orientacionAnterior < 0)
 		{
 			orientacionAnterior = 3;
 		}
 		
-		piezaActual->setOrientacion(orientacionAnterior);
+		piezaActual->setOrientacion(
+									orientacionAnterior);
+		
 		resultado = true;
 	}
 	
@@ -312,7 +415,8 @@ bool LogicaTetris::rehacer()
 		return false;
 	}
 	
-	char movimiento = registro.getMovimientoSiguiente();
+	char movimiento =
+		registro.getMovimientoSiguiente();
 	
 	if (movimiento == '\0')
 	{
@@ -325,19 +429,23 @@ bool LogicaTetris::rehacer()
 	
 	if (movimiento == 'I')
 	{
-		resultado = piezaActual->moverIzquierda(tablero);
+		resultado =
+			piezaActual->mover_Izquierda(tablero);
 	}
 	else if (movimiento == 'D')
 	{
-		resultado = piezaActual->moverDerecha(tablero);
+		resultado =
+			piezaActual->mover_Derecha(tablero);
 	}
 	else if (movimiento == 'B')
 	{
-		resultado = piezaActual->bajar(tablero);
+		resultado =
+			piezaActual->bajar(tablero);
 	}
 	else if (movimiento == 'R')
 	{
-		resultado = piezaActual->rotar(tablero);
+		resultado =
+			piezaActual->rotar(tablero);
 	}
 	
 	ejecutandoHistorial = false;
@@ -360,20 +468,20 @@ void LogicaTetris::prepararEventos()
 	colaEventos.encolar('B', 500);
 	colaEventos.encolar('D', 1000);
 	colaEventos.encolar('V', 1500);
+	
 	colaEventos.encolar('B', 2000);
 	colaEventos.encolar('D', 2500);
 	colaEventos.encolar('V', 3000);
 }
+
 void LogicaTetris::revisarEventos()
 {
-	if (colaEventos.estaVacia())
+	while (!colaEventos.estaVacia() &&
+		   puntaje.getPuntos() >=
+		   colaEventos.Activacion())
 	{
-		return;
-	}
-	
-	if (puntaje.getPuntos() >= colaEventos.verActivacion())
-	{
-		NodoEvento* evento = colaEventos.desencolar();
+		NodoEvento* evento =
+			colaEventos.desencolar();
 		
 		cout << "Evento activado: "
 			<< evento->getTipoEvento()
@@ -383,9 +491,13 @@ void LogicaTetris::revisarEventos()
 		{
 			eventosEspeciales.activarBomba();
 		}
-		if (evento->getTipoEvento() == 'D')
+		else if (evento->getTipoEvento() == 'D')
 		{
 			eventosEspeciales.activarDoblePuntos();
+		}
+		else if (evento->getTipoEvento() == 'V')
+		{
+			eventosEspeciales.activar_Velocidad();
 		}
 		
 		delete evento;
@@ -409,24 +521,64 @@ int LogicaTetris::getColumnaBomba()
 
 bool LogicaTetris::mover_BombaIzquierda()
 {
-	return eventosEspeciales.mover_BombaIzquierda(tablero);
+	return eventosEspeciales
+		.mover_BombaIzquierda(tablero);
 }
 
 bool LogicaTetris::mover_BombaDerecha()
 {
-	return eventosEspeciales.mover_BombaDerecha(tablero);
+	return eventosEspeciales
+		.mover_BombaDerecha(tablero);
 }
 
 bool LogicaTetris::bajar_Bomba()
 {
-	return eventosEspeciales.bajar_Bomba(tablero);
+	if (!eventosEspeciales.getBombaActiva())
+	{
+		return false;
+	}
+	
+	bool pudoBajar = eventosEspeciales.bajar_Bomba(tablero);
+	
+	if (!pudoBajar)
+	{
+		eventosEspeciales.colocarBomba(tablero);
+	}
+	
+	return pudoBajar;
 }
 
 void LogicaTetris::colocarBomba()
 {
 	eventosEspeciales.colocarBomba(tablero);
 }
+
 bool LogicaTetris::getDoblePuntosActivo()
 {
-	return eventosEspeciales.getDoblePuntosActivo();
+	return eventosEspeciales
+		.getDoblePuntosActivo();
+}
+
+char LogicaTetris::getCeldaPiezaActual(
+									   int fila,
+									   int columna)
+{
+	if (piezaActual == nullptr)
+	{
+		return '\0';
+	}
+	
+	return piezaActual->getCelda(
+								 fila,
+								 columna);
+}
+
+bool LogicaTetris::getGame_Over()
+{
+	return Game_Over;
+}
+
+float LogicaTetris::getVelocidadCaida()
+{
+	return eventosEspeciales.getVelocidad_Caida();
 }

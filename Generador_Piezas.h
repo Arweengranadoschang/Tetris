@@ -2,17 +2,16 @@
 #define GENERADOR_PIEZAS_H
 #include "Piezas_cola.h"
 
-class GeneradorPiezas
-{
+class GeneradorPiezas{
 private:
 	ColaPiezas cola;
 	
 public:
 	GeneradorPiezas();
-	char siguientePieza();
-	char verPieza(int posicion);
+	char siguiente_Pieza();
+	char ver_Pieza(int posicion);
 	
-	void generarBolsa();
+	void generar_Bolsa();
+	void asegurar_Piezas();
 };
-
 #endif

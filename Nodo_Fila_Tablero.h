@@ -1,8 +1,7 @@
 #ifndef NODO_FILA_TABLERO_H
 #define NODO_FILA_TABLERO_H
 
-class NodoFilaTablero
-{
+class NodoFilaTablero{
 private:
 	char celdas[10];
 	NodoFilaTablero* siguiente;
@@ -18,5 +17,4 @@ public:
 	
 	bool estaLlena();
 };
-
 #endif
