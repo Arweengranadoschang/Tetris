@@ -12,10 +12,8 @@ public:
 	
 	void encolar(char tipoEvento, int activacion);
 	NodoEvento* desencolar();
-	
 	char Tipo_Evento();
 	int Activacion();
-	
 	bool estaVacia();
 };
 

@@ -8,13 +8,10 @@ private:
 	
 public:
 	NodoFilaTablero();
-	
 	char getCelda(int posicion);
 	void setCelda(int posicion, char valor);
-	
 	NodoFilaTablero* getSiguiente();
 	void setSiguiente(NodoFilaTablero* siguiente);
-	
 	bool estaLlena();
 };
 #endif

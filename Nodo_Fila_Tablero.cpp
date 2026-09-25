@@ -5,7 +5,6 @@ NodoFilaTablero::NodoFilaTablero(){
 	{
 		celdas[i] = '.';
 	}
-	
 	siguiente = nullptr;
 }
 
@@ -14,7 +13,6 @@ char NodoFilaTablero::getCelda(int posicion){
 	if (posicion < 0 || posicion >= 10)	{
 		return '\0';
 	}
-	
 	return celdas[posicion];
 }
 
@@ -22,7 +20,6 @@ void NodoFilaTablero::setCelda(int posicion, char valor){
 	if (posicion < 0 || posicion >= 10){
 		return;
 	}
-	
 	celdas[posicion] = valor;
 }
 bool NodoFilaTablero::estaLlena(){
@@ -37,12 +34,10 @@ bool NodoFilaTablero::estaLlena(){
 	return true;
 }
 
-NodoFilaTablero* NodoFilaTablero::getSiguiente(){
-	
+NodoFilaTablero* NodoFilaTablero::getSiguiente(){	
 	return siguiente;
 }
 
 void NodoFilaTablero::setSiguiente(NodoFilaTablero* siguiente){
-	
 	this->siguiente = siguiente;
 }

@@ -9,10 +9,8 @@ private:
 	
 public:
 	PilaEnEspera();
-	
 	void apilar(char pieza);
 	char desapilar();
-	
 	char verCima();
 	bool estaVacia();
 };

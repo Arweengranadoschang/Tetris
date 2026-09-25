@@ -14,19 +14,14 @@ private:
 	
 public:
 	PiezaTetris(char tipo);
-	
 	char getTipo();
 	int getOrientacion();
 	void setOrientacion(int orientacion);
-	
 	int getFila();
 	int getColumna();
-	
 	void setFila(int fila);
 	void setColumna(int columna);
-	
 	char getCelda(int fila, int columna);
-	
 	bool puede_Colocarse(Tablero& tablero, int nuevaFila, int nuevaColumna);
 	bool mover_Izquierda(Tablero& tablero);
 	bool mover_Derecha(Tablero& tablero);

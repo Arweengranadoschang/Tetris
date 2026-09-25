@@ -10,7 +10,6 @@ public:
 	GeneradorPiezas();
 	char siguiente_Pieza();
 	char ver_Pieza(int posicion);
-	
 	void generar_Bolsa();
 	void asegurar_Piezas();
 };

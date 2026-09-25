@@ -1,8 +1,8 @@
 #include "Piezas_Tetris.h"
 
 PiezaTetris::PiezaTetris(char tipo){
-	this->tipo = tipo;
 	
+	this->tipo = tipo;
 	orientacion = 0;
 	
 	fila = 0;
@@ -249,7 +249,6 @@ bool PiezaTetris::rotar(Tablero& tablero){
 	}
 	
 	int orientacionAnterior = orientacion;
-	
 	orientacion = nuevaOrientacion;
 	
 	if (puede_Colocarse(tablero, fila, columna)){

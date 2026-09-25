@@ -1,16 +1,14 @@
 #ifndef PUNTAJE_TABLA_H
 #define PUNTAJE_TABLA_H
 
-class PuntajeTabla
+class Puntaje
 {
 private:
 	int puntos;
 	
 public:
-	PuntajeTabla();
-	
+	Puntaje();
 	void agregarPuntos(int cantidadFilas, int multiplicador = 1);
-	
 	int getPuntos();
 };
 

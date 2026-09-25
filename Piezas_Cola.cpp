@@ -24,8 +24,7 @@ char ColaPiezas::desencolar(){
 	}
 	
 	NodoCola* auxiliar = frente;
-	char pieza = frente->getPieza();
-	
+	char pieza = frente->getPieza();	
 	frente = frente->getSiguiente();
 	
 	if (frente == nullptr){

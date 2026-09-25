@@ -21,12 +21,10 @@ char PilaEnEspera::desapilar(){
 	}
 	
 	NodoPila* auxiliar = cima;
-	char pieza = cima->getPieza();
-	
+	char pieza = cima->getPieza();	
 	cima = cima->getSiguiente();
 	
 	delete auxiliar;
-	
 	return pieza;
 }
 

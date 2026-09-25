@@ -106,7 +106,6 @@ void Tablero::eliminar_Fila(int fila){
 	delete auxiliar;
 	
 	NodoFilaTablero* nuevaFila = new NodoFilaTablero();
-	
 	nuevaFila->setSiguiente(primeraFila);
 	primeraFila = nuevaFila;
 }

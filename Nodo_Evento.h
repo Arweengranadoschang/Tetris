@@ -9,10 +9,8 @@ private:
 	
 public:
 	NodoEvento(char tipoEvento, int activacion);
-	
 	char getTipoEvento();
 	int getActivacion();
-	
 	NodoEvento* getSiguiente();
 	void setSiguiente(NodoEvento* siguiente);
 };

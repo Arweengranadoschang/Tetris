@@ -27,18 +27,12 @@ void GeneradorPiezas::generar_Bolsa(){
 char GeneradorPiezas::siguiente_Pieza(){
 
 	char pieza = cola.desencolar();
-	
 	asegurar_Piezas();
-	
 	return pieza;	
 }
 
 char GeneradorPiezas::ver_Pieza(int posicion){
-	
-	
 	asegurar_Piezas();
-	
-	
 	return cola.verPieza(posicion);
 }
 

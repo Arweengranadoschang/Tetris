@@ -9,13 +9,10 @@ private:
 	
 public:
 	ColaPiezas();
-	
 	void encolar(char pieza);
 	char desencolar();
-	
 	char verFrente();
 	char verPieza(int posicion);
-	
 	bool estaVacia();
 };
 #endif

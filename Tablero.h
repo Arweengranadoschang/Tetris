@@ -8,10 +8,8 @@ private:
 	
 public:
 	Tablero();
-	
 	char getCelda(int fila, int columna);
 	void setCelda(int fila, int columna, char valor);
-	
 	void mostrar_Tablero();
 	bool fila_Llena(int fila);
 	void eliminar_Fila(int fila);

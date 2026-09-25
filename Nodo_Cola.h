@@ -8,10 +8,8 @@ private:
 	
 public:
 	NodoCola(char pieza);
-	
 	char getPieza();
 	NodoCola* getSiguiente();
-	
 	void setSiguiente(NodoCola* siguiente);
 };
 #endif
